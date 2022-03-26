@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import GridArray from './test';
 import './App.css';
 
+import { useNavigate } from 'react-router-dom';
+
+import { initializeApp } from "firebase/app";
+import firebaseConfig from './firebaseconfig';
+const app = initializeApp(firebaseConfig);
+
 function App() {
+//   const navigate = useNavigate()
+//   const loginHandler = () => {
+//     navigate('/login')
+//   }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+    <div className="grid grid-rows-3 bg-yellow-200 m-5 rounded-2xl">
+      <div></div>
+      <div>
+        <p className="text-6xl text-amber-900 font-Oswald text-right px-5 pb-2">
+          W E L C O M E
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <GridArray/>
+      </div>
+      <div></div>
     </div>
   );
 }
