@@ -9,7 +9,7 @@ export const signUp = ({
     passwordconfirm
 }, onSuccess, onFailure) => {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, fullname, email, phonenumber, password, passwordconfirm)
+    createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
@@ -17,7 +17,9 @@ export const signUp = ({
                 displayName: fullname,
             })
 
-            // ...
+            if(onSuccess) {
+                onSuccess();
+            }
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -34,11 +36,10 @@ export const signIn = ({ email, password }, onSuccess, onFailure) => {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            store.user.set({fullName: user?.displayName, email: user.email, emailVerified: user.emailVerified, isAuthenticated: true});
+            store.user.set({fullName: user?.displayName, email: user.email, emailVerified: user.emailVerified, isAuthenticated: true, uid: user.uid});
             if(onSuccess) {
                 onSuccess();
             }
-            // ...
         })
         .catch((error) => {
             const errorCode = error.code;

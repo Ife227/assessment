@@ -5,8 +5,10 @@ import { signUp } from '../services/auth';
 import { useFormik } from 'formik';
 import { signUpValidationSchema } from '../utils/form-utils';
 import { FaSpinner } from 'react-icons/fa';
+import logo from "../images/jhblogo25th.png"
 
 function SignUp() {
+    const navigate = useNavigate()
     const [processing, setProcessing] = useState(false)
     const formik = useFormik({
         initialValues: {
@@ -21,11 +23,12 @@ function SignUp() {
             setProcessing(true)
             //call firebase to signup
             signUp(values, onSuccess)
-            setProcessing(false)
         }
     })
     // navigation stuff
-    const navigate = useNavigate()
+    const homeHandler = () => {
+        navigate("/");
+    };
     const loginHandler = () => {
         navigate('/login')
     }
@@ -36,8 +39,8 @@ function SignUp() {
         navigate('/contact')
     }
     const onSuccess = () => {
-        // caback for onSuccess
-        navigate('/home')
+        // callback for onSuccess
+        navigate('/quiz/start')
     }
     const handleFullName = formik.handleChange
     const handleEmail = formik.handleChange
@@ -48,7 +51,9 @@ function SignUp() {
     return (
         <div className="bg-yellow-200 m-5 rounded-3xl text-center h-screen">
             <div className="grid grid-cols-3 h-fit pb-5">
-                <div></div>
+                <div>
+                <img src={logo} alt="" className="m-5 rounded-full cursor-pointer" onClick={homeHandler}/>
+                </div>
                 <div>
                     <p className="text-6xl text-amber-700 font-Oswald mb-10 pt-2">S I G N U P</p>
                 </div>
@@ -137,7 +142,7 @@ function SignUp() {
                     {processing && <FaSpinner
                         icon="spinner"
                         className="spinner animate-spin"
-                        color="blue"
+                        color="orange"
                         size={35} />}
                 </button>
             </form>

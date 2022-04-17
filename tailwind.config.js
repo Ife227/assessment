@@ -6,6 +6,9 @@ module.exports = {
     extend: {
         fontFamily: {
           Oswald: ["Oswald", "sans-serif"]
+        }, 
+        backgroundImage: {
+          'quiz-time': "url('../images/quiztime.jpg')"
         }
     }
   },
