@@ -24,7 +24,7 @@ export const getListOfQuestions = async () => {
   store.questions.set(questions);
 };
 
-export const submitAnswers = async (answers, onSuccess, onFailure, isLast) => {
+export const submitAnswers = async (answers, onSuccess, isLast, onFailure) => {
   const isCorrect = await checkCorrect(answers);
   answers = { isCorrect, ...answers };
   const db = getFirestore();
@@ -115,8 +115,8 @@ export const countNotCorrect = async (uid) => {
   const db = getFirestore();
   const q = query(
     collection(db, "submissions"),
-    where("uid", " == ", uid),
-    where("isCorrect", " == ", false)
+    where("uid", "==", uid),
+    where("isCorrect", "==", false)
   );
 
   const querySnapshot = await getDocs(q);
