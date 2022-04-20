@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState as useGlobalState } from "@hookstate/core";
 import store from "../../store";
 import quiz from "../../images/quiztime.jpg";
+import logo from "../../images/jhblogo25th.png";
 import { getResults, submitAnswers } from "../../services/questions";
 
 const Questions = ({ listOfQuestions, answersDictionary }) => {
@@ -42,13 +43,16 @@ const Questions = ({ listOfQuestions, answersDictionary }) => {
   const onSubmitSuccess = (answers) => {
     navigate("/quiz/results");
   };
+  const homeHandler = () => {
+    navigate("/");
+  };
   let buttonHtml;
   const previousButton = (
     <input
       onClick={previous}
       type="button"
       value="Previous"
-      className="bg-amber-600 px-8 py-3 text-center rounded-full ml-52 my-1 cursor-pointer"
+      className="bg-amber-600 px-8 py-2 text-center rounded-full mx-2 cursor-pointer"
     />
   );
   const nextButton = (
@@ -56,7 +60,7 @@ const Questions = ({ listOfQuestions, answersDictionary }) => {
       type="button"
       value="Next"
       onClick={next}
-      className="bg-amber-600 px-8 py-2 text-center rounded-full mx-52 cursor-pointer"
+      className="bg-amber-600 px-8 py-2 text-center rounded-full mx-2 cursor-pointer"
     />
   );
   if (index === 0) {
@@ -71,22 +75,30 @@ const Questions = ({ listOfQuestions, answersDictionary }) => {
       </div>
     );
   } else {
-    <>
-      {previousButton}
-      {nextButton}
-    </>;
+    buttonHtml = (
+      <div className="flex flex-row">
+        {previousButton}
+        {nextButton}
+      </div>
+    );
   }
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-2 h-screen">
       <div>
-        <img src={quiz} alt="" className="h-5/6 my-12 mx-10 rounded-full" />
+        <img
+          src={logo}
+          alt=""
+          className="mt-5 mx-5 rounded-full cursor-pointer"
+          onClick={homeHandler}
+        />
+        <img src={quiz} alt="" className="h-5/6 mx-10 rounded-full" />
       </div>
       <div className="bg-yellow-200 rounded-full h-screen">
         <form onSubmit={formik.handleSubmit} className="text-center py-48">
-          <div className="h-screen">
+          <div>
             <div key={`question${index}`}>
               <div className="font-Oswald text-xl">Question {index + 1}</div>
-              <div className="font-Oswald">{q?.question}</div>
+              <div className="font-Oswald mb-5">{q?.question}</div>
               <div className="ml-5">
                 {q?.type === "multiple-choice" ? (
                   <div>
@@ -139,7 +151,7 @@ const Questions = ({ listOfQuestions, answersDictionary }) => {
                   </div>
                 )}
                 <br />
-                <div>{buttonHtml}</div>
+                <div className="align-center">{buttonHtml}</div>
               </div>
             </div>
           </div>

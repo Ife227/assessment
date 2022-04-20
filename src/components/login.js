@@ -51,7 +51,7 @@ function Login({ description }) {
   const handlePassword = formik.handleChange;
 
   return (
-    <div className="bg-yellow-200 m-5 rounded-3xl grid grid-rows-3 text-center h-full">
+    <div className="bg-yellow-200 m-5 rounded-3xl grid grid-rows-3 text-center">
       <div className="grid grid-cols-3">
         <div>
           <img
@@ -63,13 +63,13 @@ function Login({ description }) {
         </div>
         <div>
           <p className="text-6xl text-amber-700 font-Oswald pt-2">
-            S I G N I N{" "}
+            S I G N I N
           </p>
         </div>
         <div className="text-amber-700">
           <button
             onClick={aboutHandler}
-            className="text-lg font-semibold pt-1 px-2 cursor-pointer"
+            className="text-lg font-semibold px-2 cursor-pointer"
           >
             about
           </button>
@@ -91,7 +91,7 @@ function Login({ description }) {
       </div>
       <form
         onSubmit={formik.handleSubmit}
-        className="text-lg bg-amber-200 mx-64 py-10 rounded-3xl"
+        className="text-lg bg-amber-200 mx-64 py-5 rounded-3xl"
       >
         <div>
           <label>email: </label>
@@ -103,7 +103,7 @@ function Login({ description }) {
             placeholder="enter email"
             className="shadow-inner rounded-lg px-32 p-1 placeholder:text-center"
           />
-          <div className="text-red-500 text-xs">{formik.errors.email}</div>
+          <div className="text-yellow-700 text-xs">{formik.errors.email}</div>
         </div>
         <br />
         <div>
@@ -117,10 +117,12 @@ function Login({ description }) {
             placeholder="enter your password"
             className="shadow-inner rounded-lg px-32 p-1 placeholder:text-center"
           />
-          <div className="text-red-500 text-xs">{formik.errors.password}</div>
+          <div className="text-yellow-700 text-xs">
+            {formik.errors.password}
+          </div>
         </div>
         <br />
-        <button className="bg-amber-600 rounded-full py-2 px-32 font-Oswald font-bold">
+        <button className="bg-amber-600 rounded-full py-2 px-32 mx-60 font-Oswald font-bold flex flex-row">
           <input type="submit" name="submit" value="log in" />
 
           {processing && (
@@ -128,13 +130,12 @@ function Login({ description }) {
               icon="spinner"
               className="spinner animate-spin"
               color="orange"
-              size={35}
+              size={30}
             />
           )}
         </button>
-        <div>{serverError}</div>
       </form>
-      <div className="m-1">
+      <div>
         <p
           onClick={passwordForgot}
           className="text-lg text-amber-700 font-semibold cursor-pointer mx-96 mt-3"
